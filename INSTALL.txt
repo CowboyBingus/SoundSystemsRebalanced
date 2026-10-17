@@ -1,0 +1,23 @@
+Sound Systems Rebalanced v1.0
+Supports Helldivers 2 Steam build 25480438 / EXE 1.8.46015.0.
+
+Install Bingus Shared Loader v18 or newer and import this ZIP into Arsenal or
+HD2MM. Enable and deploy both, then restart Helldivers 2.
+
+What it changes: every mission plays its music at the volume you hear after
+deploying from the war table. Before, the music was 6 dB louder when you
+deployed from anywhere else on the Super Destroyer, most often when joining a
+mission already in progress. The ship's own music is unchanged.
+
+It also stops mission music from going silent on swamp, deciduous and
+coniferous forest, desert, oasis, hive world and active rift planets: those
+now play the music's default version, the one grassland planets play.
+
+On any other game build the volume fix does nothing and says so in the log:
+%LOCALAPPDATA%/CowboyBingus/Helldivers2/Logs/SoundSystemsRebalanced.log
+The silent-music fix is a copy of a game sound bank and cannot switch itself
+off: after a game update, disable this mod until a matching version is out.
+
+To remove it, disable or remove it in the mod manager.
+
+https://github.com/CowboyBingus/BingusSharedLoader/releases/latest
