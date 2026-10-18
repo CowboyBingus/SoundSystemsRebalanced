@@ -24,6 +24,7 @@
   "tests/frame_budget.lua",
   "tests/game_lua.py",
   "tests/hostile_vm.lua",
+  "tests/reference/sound_systems_rebalanced.lua",
   "tests/test_biome_patch.py",
   "tests/test_entry.lua",
   "tests/test_mod.lua"

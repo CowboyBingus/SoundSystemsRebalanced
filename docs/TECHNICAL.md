@@ -61,6 +61,10 @@ Nothing is written to game memory, and no game or Wwise function is called direc
 No page queries, no allocation per frame (two small buffers made at load; tested at 0 bytes per frame, compiled
 and interpreted, in the game's `lua51.dll`), and no C types per frame.
 
+The per-frame step runs interpreted (`jit.off`, the step's own function only): the shared runtime's guard calls it
+under `pcall`, so a trace started at its entry aborts where it returns and LuaJIT would retry it whenever its
+penalty slot is evicted. The read it makes every 0.25 s still compiles.
+
 ## Silent music on unmapped biomes
 
 ### The cause
@@ -164,6 +168,8 @@ capture `fix-2`.
 `tests/test_mod.lua` runs the real Bingus Shared Runtime against a synthetic game object in the test process's
 memory, with an exact call budget per scenario (`tests/frame_budget.lua`): first read, ship idle, mission start
 and no repeat, the next mission, a stale or not yet created game object, a missing frame time, no garbage or C
-types per frame, the install refusals (wrong build, no loader, no engine binding), and a guarded update with a
-failing update below it. `tests/test_entry.lua` runs the assembled entry twice outside the game. Both run in
-LuaJIT and in the game's `lua51.dll` (`tests/game_lua.py`).
+types per frame, the install refusals (wrong build, no loader, no engine binding), a guarded update with a
+failing update below it, every frame of a 6,000-frame script against the code first published as v1.0
+(`tests/reference/`: calls, room settings, log lines and status equal) and no aborted trace at the guarded step.
+`tests/test_entry.lua` runs the assembled entry twice outside the game. Both run in LuaJIT and in the game's
+`lua51.dll` (`tests/game_lua.py`).
